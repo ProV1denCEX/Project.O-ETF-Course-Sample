@@ -13,19 +13,19 @@ Milestone 0:
 - Data Collection: Wenhan, Saurabh
 - Data Update: Saurabh
 
-Milestone 1:
+### Milestone 1:
 - Platform preparation: Frontal. Prototype finished, need to be adjusted.
 - Different scenarios simu and analysis in BT. Need to explain the performance under different scenarios.
   - scenarios design: Wenhan, Saurabh
   - scenarios test & pressure test: Frontal
 
-Milestone 2:
+### Milestone 2:
 - Strategy build: Frontal. Ideas and codes finished, need to be adjusted.
 
-Milestone 3:
+### Milestone 3:
 - Allocation plan: Frontal. Platform finished, waiting for the result of Backtest.
 
-Milestone 4:
+### Milestone 4:
 - Slides: unknown, need to be compared for each one's works before.
 - Rule book:
   - Prototype: Wenhan, Saurabh -> find a good rule book sample suitable for our project.
