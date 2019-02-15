@@ -8,7 +8,7 @@ A strategy pack containing 6 / 7 different option strategies to earn money all t
 Finish all 4 different milestones: https://github.com/ProV1denCEX/Project.O/milestones
 
 ## Work division:
-Milestone 0:
+### Milestone 0:
 - target selection: Frontal
 - Data Collection: Wenhan, Saurabh
 - Data Update: Saurabh
