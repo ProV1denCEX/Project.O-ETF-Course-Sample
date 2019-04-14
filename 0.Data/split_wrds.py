@@ -1,6 +1,6 @@
 import pandas as pd
 
-data_raw = pd.read_csv("G:\\0.Download\\a392882e8ab976b7_csv\\Option_wrds.csv")
+data_raw = pd.read_csv("G:\\0.Download\\2c9a8623865e785b_csv\\Option_wrds.csv")
 
 for i in range(0, 18):
     if i == 0:
@@ -12,7 +12,7 @@ for i in range(0, 18):
 
     d_temp = data_raw[(data_raw.last_date >= n_year_start) & (data_raw.last_date < n_year_end)]
 
-    s_file_name = "Option_" + str(2000 + i) + ".csv"
+    s_file_name = "Option_SPX_" + str(2000 + i) + ".csv"
     d_temp.to_csv(s_file_name)
     print(s_file_name + " DONE !")
 

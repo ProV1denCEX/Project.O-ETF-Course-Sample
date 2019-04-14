@@ -21,7 +21,7 @@ DSNs = {
 
 dsn = DSNs['sql_server']
 eng = create_engine(dsn)
-d_list = pd.read_sql_query("select name from sysobjects where xtype='u'", eng)
+# d_list = pd.read_sql_query("select name from sysobjects where xtype='u'", eng)
 data_raw = pd.read_csv("G:\\0.Download\\a392882e8ab976b7_csv\\Option_wrds.csv")
 
 # try:
@@ -44,12 +44,13 @@ data_raw = pd.read_csv("G:\\0.Download\\a392882e8ab976b7_csv\\Option_wrds.csv")
 #     eng = create_engine(dsn)
 #     eng.connect()
 
-async def write(temp, s_table, eng):
+
+def write(temp, s_table, eng):
     temp.to_sql(s_table, eng, if_exists="fail", method='multi')
     print(s_table + " finished!")
 
 
-async def check_write(temp, s_table, eng):
+def check_write(temp, s_table, eng):
     d_old = pd.read_sql_table(s_table, eng)
     if not temp.reset_index().equals(d_old):
         temp.to_sql(s_table, eng, if_exists="replace", method='multi')
@@ -58,31 +59,35 @@ async def check_write(temp, s_table, eng):
         print(s_table + " No need")
 
 
-async def go(i_symbol):
+def go(i_symbol):
     s_table = "SP500_Option_" + i_symbol
-    if s_table not in d_list.name.values and "SPX" in i_symbol:
-        temp = data_raw[data_raw.symbol == i_symbol]
+    temp = data_raw[data_raw.symbol == i_symbol]
 
-        try:
-            await write(temp, s_table, eng)
+    try:
+        write(temp, s_table, eng)
 
-        except ValueError:
-            await check_write(temp, s_table, eng)
+    except ValueError:
+        check_write(temp, s_table, eng)
 
 
 symbol = data_raw.symbol.unique()
-task = [go(i_symbol) for i_symbol in symbol]
+# task = [go(i_symbol) for i_symbol in symbol]
+#
+# loop = asyncio.get_event_loop()
+# loop.run_until_complete(asyncio.wait(task))
+# loop.close()
 
-loop = asyncio.get_event_loop()
-loop.run_until_complete(asyncio.wait(task))
-loop.close()
-print("ALL FINISH!")
+if __name__ == '__main__':
+    for i in symbol:
+        go(i)
+    print("ALL FINISH!")
 
-data_raw = pd.read_csv("^GSPC.csv")
-data_raw.to_sql("SP500_Daily", eng, if_exists="replace")
 
-data_raw = pd.read_csv("VIX.csv")
-data_raw.to_sql("SP500_VIX", eng, if_exists="replace")
+# data_raw = pd.read_csv("^GSPC.csv")
+# data_raw.to_sql("SP500_Daily", eng, if_exists="replace")
+#
+# data_raw = pd.read_csv("VIX.csv")
+# data_raw.to_sql("SP500_VIX", eng, if_exists="replace")
 
 
 # FIXME paral
